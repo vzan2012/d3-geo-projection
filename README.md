@@ -7,9 +7,9 @@ Extended geographic projections for [d3-geo](https://github.com/d3/d3-geo). See 
 If you use NPM, `npm install d3-geo-projection`. Otherwise, download the [latest release](https://github.com/d3/d3-geo-projection/releases/latest). You can also load directly from [d3js.org](https://d3js.org) as a [standalone library](https://d3js.org/d3-geo-projection.v2.min.js). AMD, CommonJS, and vanilla environments are supported. In vanilla, a `d3` global is exported:
 
 ```html
-<script src="https://d3js.org/d3-array.v1.min.js"></script>
-<script src="https://d3js.org/d3-geo.v1.min.js"></script>
-<script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+<script src="https://d3js.org/d3-array.v2.min.js"></script>
+<script src="https://d3js.org/d3-geo.v2.min.js"></script>
+<script src="https://d3js.org/d3-geo-projection.v3.min.js"></script>
 <script>
 
 var aitoff = d3.geoAitoff();
@@ -663,7 +663,7 @@ Defaults to 0°.
 
 <a href="#satellite_distance" name="satellite_distance">#</a> <i>satellite</i>.<b>distance</b>([<i>distance</i>])
 
-Distance from the center of the sphere to the point of view, as a proportion of the sphere’s radius; defaults to 2.0. The recommended maximum [clip angle](https://github.com/d3/d3-geo/blob/master/README.md#projection_clipAngle) for a given *distance* is acos(1 / *distance*) converted to degrees. If [tilt](#satellite_tilt) is also applied, then more conservative clipping may be necessary. For exact clipping, the in-development geographic projection pipeline is needed; see the [satellite example](https://bl.ocks.org/mbostock/e48a00d4db5c3b042145).
+Distance from the center of the sphere to the point of view, as a proportion of the sphere’s radius; defaults to 2.0. The recommended maximum [clip angle](https://github.com/d3/d3-geo/blob/master/README.md#projection_clipAngle) for a given *distance* is acos(1 / *distance*) converted to degrees. If [tilt](#satellite_tilt) is also applied, then more conservative clipping may be necessary. For exact clipping, the in-development geographic projection pipeline is needed; see the [satellite explorer](https://observablehq.com/@d3/satellite-explorer).
 
 <a href="#geoSinusoidal" name="geoSinusoidal">#</a> d3.<b>geoSinusoidal</b>() · [Source](https://github.com/d3/d3-geo-projection/blob/master/src/sinusoidal.js), [Examples](https://observablehq.com/@d3/sinusoidal)
 <br><a href="#geoSinusoidalRaw" name="geoSinusoidalRaw">#</a> d3.<b>geoSinusoidalRaw</b>
@@ -714,7 +714,7 @@ The two-point azimuthal projection with points [-158°, 21.5°] and [-77°, 39°
 <a href="#geoTwoPointEquidistant" name="geoTwoPointEquidistant">#</a> d3.<b>geoTwoPointEquidistant</b>(<i>point0</i>, <i>point1</i>) · [Source](https://github.com/d3/d3-geo-projection/blob/master/src/twoPointEquidistant.js)
 <br><a href="#geoTwoPointEquidistantRaw" name="geoTwoPointEquidistantRaw">#</a> d3.<b>geoTwoPointEquidistantRaw</b>(<i>z0</i>)
 
-The two-point equidistant projection. This projection does not support [*projection*.rotate](https://github.com/d3/d3-geo/blob/master/README.md#projection_rotate), as the rotation is fixed by the two given points. Note: to show the whole Earth, this projection requires clipping to spherical polygons, which is not yet supported in D3. However, you can typically show most of the Earth by using D3’s great-circle clipping.
+The two-point equidistant projection. This projection does not support [*projection*.rotate](https://github.com/d3/d3-geo/blob/master/README.md#projection_rotate), as the rotation is fixed by the two given points. Note: to show the whole Earth, this projection requires clipping to spherical polygons ([example](https://observablehq.com/@d3/two-point-equidistant)).
 
 <a href="#geoTwoPointEquidistantUsa" name="geoTwoPointEquidistantUsa">#</a> d3.<b>geoTwoPointEquidistantUsa</b>() · [Source](https://github.com/d3/d3-geo-projection/blob/master/src/twoPointEquidistant.js)
 
@@ -788,7 +788,6 @@ The Wagner IV projection, also known as Putniṇš P2´.
 The Wagner VI projection.
 
 <a href="#geoWagner7" name="geoWagner7">#</a> d3.<b>geoWagner7</b>() · [Source](https://github.com/d3/d3-geo-projection/blob/master/src/wagner7.js), [Examples](ttps://observablehq.com/@d3/wagner-vii)
-<br><a href="#geoWagner7Raw" name="geoWagner7Raw">#</a> d3.<b>geoWagner7Raw</b>
 
 [<img src="https://raw.githubusercontent.com/d3/d3-geo-projection/master/img/wagner7.png" width="480" height="250">](https://observablehq.com/@d3/wagner-vii)
 
@@ -925,13 +924,13 @@ The Peirce quincuncial projection is the quincuncial form of the [Guyou projecti
 
 Projects the specified GeoJSON *object* using the specified *projection*, returning a shallow copy of the specified GeoJSON *object* with projected coordinates. Typically, the input coordinates are spherical and the output coordinates are planar, but the *projection* can also be an [arbitrary geometric transformation](https://github.com/d3/d3-geo/blob/master/README.md#transforms).
 
-See also [geoproject](#geoproject).
+See also [geoproject](#geoproject-bin).
 
 <a href="#geoStitch" name="geoStitch">#</a> d3.<b>geoStitch</b>(<i>object</i>) · [Source](https://github.com/d3/d3-geo-projection/blob/master/src/stitch.js)
 
 Returns a shallow copy of the specified GeoJSON *object*, removing antimeridian and polar cuts, and replacing straight Cartesian line segments with geodesic segments. The input *object* must have coordinates in longitude and latitude in decimal degrees per [RFC 7946](https://tools.ietf.org/html/rfc7946). [Antimeridian cutting](https://bl.ocks.org/mbostock/3788999), if needed, can then be re-applied after rotating to the desired projection aspect.
 
-See also [geostitch](#geostitch).
+See also [geostitch](#geostitch-bin).
 
 <a href="#geoQuantize" name="geoQuantize">#</a> d3.<b>geoQuantize</b>(<i>object</i>, <i>digits</i>) · [Source](https://github.com/d3/d3-geo-projection/blob/master/src/quantize.js)
 
@@ -1065,7 +1064,7 @@ Sets the graticule’s [precision](https://github.com/d3/d3-geo/blob/master/READ
 
 ### geoproject
 
-<a href="#geoproject" name="geoproject">#</a> <b>geoproject</b> [<i>options</i>…] <i>projection</i> [<i>file</i>] · [Source](https://github.com/d3/d3-geo-projection/blob/master/bin/geoproject)
+<a href="#geoproject-bin" name="geoproject-bin">#</a> <b>geoproject</b> [<i>options</i>…] <i>projection</i> [<i>file</i>] · [Source](https://github.com/d3/d3-geo-projection/blob/master/bin/geoproject)
 
 Projects the GeoJSON object in the specified input *file* using the specified *projection*, outputting a new GeoJSON *object* with projected coordinates. For example, to project standard [WGS 84](https://en.wikipedia.org/wiki/World_Geodetic_System#A_new_World_Geodetic_System:_WGS_84) input using [d3.geoAlbersUsa](https://github.com/d3/d3-geo/blob/master/README.md#geoAlbersUsa):
 
@@ -1074,7 +1073,7 @@ geoproject 'd3.geoAlbersUsa()' us.json \
   > us-albers.json
 ```
 
-For geometry that crosses the antimeridian or surrounds a pole, you will want to pass input through [geostitch](#geostitch) first:
+For geometry that crosses the antimeridian or surrounds a pole, you will want to pass input through [geostitch](#geostitch-bin) first:
 
 ```bash
 geostitch world.json \
@@ -1143,7 +1142,7 @@ geoquantize us.json --precision 3 \
 
 ### geostitch
 
-<a href="#geostitch" name="geostitch">#</a> <b>geostitch</b> [<i>options</i>…] [<i>file</i>] · [Source](https://github.com/d3/d3-geo-projection/blob/master/bin/geostitch)
+<a href="#geostitch-bin" name="geostitch-bin">#</a> <b>geostitch</b> [<i>options</i>…] [<i>file</i>] · [Source](https://github.com/d3/d3-geo-projection/blob/master/bin/geostitch)
 
 Stitches the GeoJSON object in the specified input *file*, removing antimeridian and polar cuts, and replacing straight Cartesian line segments with geodesic segments. The input *object* must have coordinates in longitude and latitude in decimal degrees per [RFC 7946](https://tools.ietf.org/html/rfc7946). [Antimeridian cutting](https://bl.ocks.org/mbostock/3788999), if needed, can then be re-applied after rotating to the desired projection aspect.
 
